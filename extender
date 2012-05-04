@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+$:.unshift File.dirname(__FILE__) 
+
+# Extender
+
+require 'lib/build'
+
+require 'optparse'
+require 'yaml'
+
+override = {}
+
+# Parse command line options
+opts = OptionParser.new do |opts|
+
+  opts.on('--root [PATH]', 'Root directory of extension files.') do |root_dir|
+    override[:root] = root_dir
+  end
+
+  opts.on('--source [PATH]', 'Extension source directory.') do |source_dir|    
+    override[:source] = source_dir
+  end
+
+  opts.on('--no-chrome', 'Toggle chrome build.') do 
+    override[:targets] -= ['chrome']
+  end
+
+  opts.on('--no-safari', 'Toggle safari build.') do
+    override[:targets] -= ['safari']
+  end
+
+  opts.on('--no-firefox', 'Toggle firefox build.') do
+    override[:targets] -= ['firefox']
+  end
+
+  opts.on('--verbose', 'Verbose mode.') do
+    override[:verbose] = true
+  end
+
+end
+
+opts.parse! 
+
+build = Build.new(override)
+build.begin
