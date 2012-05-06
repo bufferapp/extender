@@ -6,7 +6,6 @@ $:.unshift File.dirname(__FILE__)
 require 'lib/build'
 
 require 'optparse'
-require 'yaml'
 
 override = {}
 
@@ -14,27 +13,40 @@ override = {}
 opts = OptionParser.new do |opts|
 
   opts.on('--root [PATH]', 'Root directory of extension files.') do |root_dir|
-    override[:root] = root_dir
+    override['root'] = root_dir
   end
 
   opts.on('--source [PATH]', 'Extension source directory.') do |source_dir|    
-    override[:source] = source_dir
+    override['source'] = source_dir
+  end
+
+  opts.on('--target [PATH]', 'Target directory inside each browser target folder.') do |target_dir|    
+    override['target'] = target_dir
+  end
+
+  opts.on('--prefix [PATH]', 'Prefix for each target folder.') do |prefix|    
+    override['prefix'] = prefix
   end
 
   opts.on('--no-chrome', 'Toggle chrome build.') do 
-    override[:targets] -= ['chrome']
+    override['targets'] -= ['chrome']
   end
 
   opts.on('--no-safari', 'Toggle safari build.') do
-    override[:targets] -= ['safari']
+    override['targets'] -= ['safari']
   end
 
   opts.on('--no-firefox', 'Toggle firefox build.') do
-    override[:targets] -= ['firefox']
+    override['targets'] -= ['firefox']
   end
 
   opts.on('--verbose', 'Verbose mode.') do
-    override[:verbose] = true
+    override['verbose'] = true
+  end
+
+  opts.on('--simulate', 'Simulate build (enables verbose mode).') do |prefix|   
+    override['verbose'] = true 
+    override['simulate'] = true
   end
 
 end
