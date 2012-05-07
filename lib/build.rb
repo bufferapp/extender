@@ -7,7 +7,7 @@ class Build
 
   def initialize(override)
     @defaults = {
-      'root' => ".",
+      'root' => Dir.pwd,
       'source' => "extension",
       'targets' => ["chrome", "safari", "firefox"],
       'prefix' => '',
