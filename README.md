@@ -12,12 +12,10 @@ It's a bit hacky right now, but I'll improve it soon.
 
 Basic (default) structure of an Extender project:
 
-'''
-_config.yml (optional)
-extender
-extension/
-lib/
-'''
+  _config.yml (optional)
+  extender
+  extension/
+  lib/
 
 Running 'extender' will copy the contents of 'extension' into three new directories, 'chrome', 'safari' and 'firefox'.
 
